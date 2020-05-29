@@ -7,7 +7,7 @@ import './collection.styles.scss';
 
 const CollectionPage = ({ match }) => {
   const collections = useContext(CollectionContext);
-  console.log(match, 'DATA???????')
+ 
   const collection = collections[match.params.collectionId];
   const { title, items } = collection;
   return (
