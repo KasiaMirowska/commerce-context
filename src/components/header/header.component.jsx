@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';//hook for using context
+import React, {useContext, useState} from 'react';//hook for using context
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -8,13 +8,16 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import CurrentUserContext from '../../context/currentUser.context';
+import CartContext from '../../context/cart.context';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import './header.styles.scss';
 
-const Header = ({ hidden }) => {
+const Header = () => {
   const currentUser = useContext(CurrentUserContext)
-  console.log(currentUser, 'USER IN HEADER?')
+  const [hidden, setHidden] = useState(true);
+  const toggleHidden = () => setHidden(!hidden)
+  
   return (
   <div className='header'>
     <Link className='logo-container' to='/'>
@@ -36,7 +39,9 @@ const Header = ({ hidden }) => {
           SIGN IN
         </Link>
       )}
+      <CartContext.Provider value = {{hidden, toggleHidden}}>
       <CartIcon />
+      </CartContext.Provider>
     </div>
     {hidden ? null : <CartDropdown />}
   </div>
