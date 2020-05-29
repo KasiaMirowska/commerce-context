@@ -7,7 +7,7 @@ import './directory.styles.scss';
 
 const Directory = () => {
   const directory = useContext(DirectoryContext)
-  console.log(directory, directory.sections,  '?????')
+
   return (
   <div className='directory-menu'>
     {directory.sections.length > 0 ? 
